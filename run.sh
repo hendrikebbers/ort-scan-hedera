@@ -15,6 +15,10 @@ run_analysis() {
   # Kopiere die Konfigurationsdatei in das temporäre Repository
   cp "ort-config/$config_file" "$temp_dir/$repo_name/.ort.yml"
 
+  rm "$temp_dir/$repo_name/Cargo.lock"
+  rm "$temp_dir/$repo_name/package-lock.json"
+  rm "$temp_dir/$repo_name/pnpm-lock.yaml"
+
   # Analyse durchführen
   /root/ort/bin/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i "$temp_dir/$repo_name" -o "ort-output/$repo_name"
 
@@ -46,6 +50,7 @@ for repo in "${repos[@]}"; do
 done
 
 # Ausgabe-Verzeichnis kopieren
+rm -rf /var/www/files/*
 cp -r ort-output /var/www/files
 
 echo "Alle Analysen abgeschlossen!"

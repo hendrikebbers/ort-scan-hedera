@@ -1,2 +1,10 @@
 analyzer:
   skip_excluded: true
+excludes:
+  scopes:
+    - pattern: "build-dependencies"
+      reason: "BUILD_DEPENDENCY_OF"
+      comment: "Packages for building the code only."
+    - pattern: "dev-dependencies"
+      reason: "DEV_DEPENDENCY_OF"
+      comment: "Packages for development only."
