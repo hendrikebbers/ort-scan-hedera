@@ -33,8 +33,8 @@ run_analysis() {
 repos=(
 #  "https://github.com/hashgraph/hedera-sdk-swift.git|hedera-sdk-swift.yml"
 #  "https://github.com/hashgraph/hedera-sdk-java.git|hedera-sdk-java.yml"
-#  "https://github.com/hashgraph/hedera-sdk-rust.git|hedera-sdk-rust.yml"
-#  "https://github.com/hashgraph/hedera-sdk-js.git|hedera-sdk-js.yml"
+  "https://github.com/hashgraph/hedera-sdk-rust.git|hedera-sdk-rust.yml"
+  "https://github.com/hashgraph/hedera-sdk-js.git|hedera-sdk-js.yml"
 #  "https://github.com/hashgraph/solo.git|solo.yml"
 #  "https://github.com/hashgraph/hedera-local-node.git|hedera-local-node.yml"
 #  "https://github.com/hashgraph/hedera-json-rpc-relay.git|hedera-json-rpc-relay.yml"
