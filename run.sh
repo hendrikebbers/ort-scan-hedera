@@ -43,6 +43,8 @@ repos=(
   "https://github.com/hiero-ledger/hiero-sdk-cpp.git|hedera-sdk-cpp.yml"
 )
 
+rm -rf ort-output
+
 # Alle Repositories durchlaufen und Funktion aufrufen
 for repo in "${repos[@]}"; do
   IFS="|" read -r repo_url config_file <<< "$repo"
