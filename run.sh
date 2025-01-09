@@ -60,6 +60,11 @@ for repo in "${repos[@]}"; do
   run_analysis "$repo_url" "$config_file"
 done
 
+# Erstelle die ZIP-Datei innerhalb des `ort-output`-Verzeichnisses
+zip_file_name="ort-output-$(date +%Y-%m-%d_%H-%M-%S).zip"
+echo "Erstelle ZIP-Datei: ort-output/$zip_file_name"
+cd ort-output && zip -r "$zip_file_name" . && cd ..
+
 # Ausgabe-Verzeichnis kopieren
 rm -rf /var/www/files/*
 cp -r ort-output /var/www/files
