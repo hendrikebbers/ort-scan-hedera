@@ -19,11 +19,14 @@ run_analysis() {
   rm "$temp_dir/$repo_name/package-lock.json"
   rm "$temp_dir/$repo_name/pnpm-lock.yaml"
 
+  rm -rf ort-output/$repo_name
+  mkdir ort-output/$repo_name
+
   # Analyse durchführen
-  /root/ort/bin/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i "$temp_dir/$repo_name" -o "ort-output/$repo_name"
+  docker run -v $temp_dir/$repo_name/:/project -v ort-output/$repo_name/:/ort-out ghcr.io/oss-review-toolkit/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i /project -o /ort-out
 
   # Bericht erstellen
-  /root/ort/bin/ort --info report -i "ort-output/$repo_name/analyzer-result.yml" -o "ort-output/$repo_name" --report-formats=WebApp,StaticHTML
+  docker run -v $temp_dir/$repo_name/:/project -v ort-output/$repo_name/:/ort-out ghcr.io/oss-review-toolkit/ort --info report -i /ort-output/analyzer-result.yml -o /ort-output --report-formats=WebApp,StaticHTML
 
   # Temp-Verzeichnis löschen (optional)
   rm -rf "$temp_dir"
