@@ -22,10 +22,10 @@ run_analysis() {
   mkdir -p ort-output/$repo_name
 
   # Analyse durchführen
-  docker run -v $temp_dir/$repo_name:/project ghcr.io/oss-review-toolkit/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i /project -o /project/out
+  /root/ort/bin/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i "$temp_dir/$repo_name" -o "$temp_dir/$repo_name/out"
 
   # Bericht erstellen
-  docker run -v $temp_dir/$repo_name:/project ghcr.io/oss-review-toolkit/ort --info report -i /project/out/analyzer-result.yml -o /project/out --report-formats=WebApp,StaticHTML
+  /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
 
   cp -r "$temp_dir/$repo_name/out" "ort-output/$repo_name"
 
