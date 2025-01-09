@@ -27,7 +27,7 @@ run_analysis() {
   # Bericht erstellen
   /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
 
-  cp -r "$temp_dir/$repo_name/out/*" "ort-output/$repo_name/"
+  cp -r $temp_dir/$repo_name/out/* ort-output/$repo_name/
 
   # Temp-Verzeichnis löschen (optional)
   rm -rf "$temp_dir"
