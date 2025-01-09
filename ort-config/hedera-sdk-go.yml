@@ -1,2 +1,7 @@
 analyzer:
   skip_excluded: true
+excludes:
+  paths:
+    - pattern: "tck/**"
+      reason: "OTHER"
+      comment: "-"
