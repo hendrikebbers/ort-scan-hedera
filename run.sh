@@ -48,6 +48,8 @@ repos=(
   "https://github.com/hiero-ledger/hiero-sdk-tck.git|hedera-sdk-tck.yml"
   "https://github.com/hiero-ledger/hiero-sdk-go.git|hedera-sdk-go.yml"
   "https://github.com/hiero-ledger/hiero-sdk-cpp.git|hedera-sdk-cpp.yml"
+  "https://github.com/nadineloepfe/hedera_sdk_python.git|hedera-sdk-python.yml"
+  "https://github.com/OpenElements/hedera-solo-action.git|hedera-solo-action.yml"
 )
 
 rm -rf ort-output
