@@ -1,0 +1,23 @@
+analyzer:
+  skip_excluded: true
+excludes:
+  paths:
+    - pattern: "examples/**"
+      reason: "OTHER"
+      comment: "-"
+    - pattern: "tck/**"
+      reason: "OTHER"
+      comment: "-"
+    - pattern: "example-android/**"
+      reason: "OTHER"
+      comment: "-"
+    - pattern: ".github/**"
+      reason: "OTHER"
+      comment: "-"
+  scopes:
+    - pattern: "jacoco*"
+      reason: "DEV_DEPENDENCY_OF"
+      comment: "Packages for development only."
+    - pattern: "test*"
+      reason: "DEV_DEPENDENCY_OF"
+      comment: "Packages for development only."
