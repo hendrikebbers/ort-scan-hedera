@@ -22,10 +22,12 @@ run_analysis() {
   mkdir -p ort-output/$repo_name
 
   # Analyse durchführen
-  docker run -v $temp_dir/$repo_name:/project -v $PWD/ort-output/$repo_name:/ort-out ghcr.io/oss-review-toolkit/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i /project -o /ort-out
+  docker run -v $temp_dir/$repo_name:/project ghcr.io/oss-review-toolkit/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i /project -o /project/out
 
   # Bericht erstellen
-  docker run -v $temp_dir/$repo_name:/project -v $PWD/ort-output/$repo_name:/ort-out ghcr.io/oss-review-toolkit/ort --info report -i /ort-out/analyzer-result.yml -o /ort-out --report-formats=WebApp,StaticHTML
+  docker run -v $temp_dir/$repo_name:/project ghcr.io/oss-review-toolkit/ort --info report -i /project/out/analyzer-result.yml -o /project/out --report-formats=WebApp,StaticHTML
+
+  cp -r "$temp_dir/$repo_name/out" "ort-output/$repo_name"
 
   # Temp-Verzeichnis löschen (optional)
   rm -rf "$temp_dir"
