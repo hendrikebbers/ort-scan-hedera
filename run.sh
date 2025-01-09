@@ -25,7 +25,7 @@ run_analysis() {
   docker run -v $temp_dir/$repo_name:/project -v $PWD/ort-output/$repo_name:/ort-out ghcr.io/oss-review-toolkit/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i /project -o /ort-out
 
   # Bericht erstellen
-  docker run -v $temp_dir/$repo_name:/project -v $PWD/ort-output/$repo_name:/ort-out ghcr.io/oss-review-toolkit/ort --info report -i /ort-output/analyzer-result.yml -o /ort-output --report-formats=WebApp,StaticHTML
+  docker run -v $temp_dir/$repo_name:/project -v $PWD/ort-output/$repo_name:/ort-out ghcr.io/oss-review-toolkit/ort --info report -i /ort-out/analyzer-result.yml -o /ort-out --report-formats=WebApp,StaticHTML
 
   # Temp-Verzeichnis löschen (optional)
   rm -rf "$temp_dir"
