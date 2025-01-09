@@ -71,6 +71,6 @@ cd ort-output && zip -r "$zip_file_name" . && cd ..
 
 # Ausgabe-Verzeichnis kopieren
 rm -rf /var/www/files/*
-cp -r ort-output/* /var/www/files/*
+cp -r ort-output/* /var/www/files/
 
 echo "Alle Analysen abgeschlossen!"
