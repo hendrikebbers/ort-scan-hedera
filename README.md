@@ -18,10 +18,9 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | ISC                | :white_check_mark: |
 | MIT                | :white_check_mark: |
 
-Info:
+### Notes
 
 - The lib https://github.com/krzyzanowskim/CryptoSwift.git has an unknown license
-
 
 ## hiero-sdk-tck
 
@@ -64,6 +63,7 @@ Info:
 | 0BSD               | :white_check_mark: |
 | Apache-2.0         | :white_check_mark: |
 | BSD-1-Clause       | ? |
+| Unknown       | ? |
 | BSD-2-Clause       | :white_check_mark: |
 | BSD-3-Clause       | :white_check_mark: |
 | ISC                | :white_check_mark: |
@@ -71,7 +71,9 @@ Info:
 | MPL-2.0            | :white_check_mark: |
 | Unicode-3.0        | ? |
 
-Unknown license: https://github.com/briansmith/ring/blob/main/LICENSE
+### Notes
+
+- Unknown license: https://github.com/briansmith/ring/blob/main/LICENSE
 
 ## solo
 
@@ -129,13 +131,12 @@ Unknown license: https://github.com/briansmith/ring/blob/main/LICENSE
 | MPL-2.0            | :white_check_mark: |
 | Python-2.0         | :white_check_mark: |
 
-Info: 
+### Notes
+
 - The LGPL-2.1-only license is not needed at runtime and can be refactored
 - Hibernate is licensed LGPL-2.1-or-later
 - We depend on "Maven:org.tukaani:xz:1.9" that should be updated to 1.10 to be under BSD0. For the given verdsion no license is defined
-- 
-
-Problem at license check: invalid: send@0.19.1 /tmp/tmp.cO0My85xIU/hedera-mirror-node/hedera-mirror-rest/node_modules/swagger-stats/node_modules/send
+- Problem at license check: invalid: send@0.19.1 /tmp/tmp.cO0My85xIU/hedera-mirror-node/hedera-mirror-rest/node_modules/swagger-stats/node_modules/send
 
 ## hedera-mirror-node-explorer
 
@@ -153,7 +154,8 @@ Problem at license check: invalid: send@0.19.1 /tmp/tmp.cO0My85xIU/hedera-mirror
 | Unlicense          | ? |
 | Zlib               | :white_check_mark: |
 
-Info:
+### Notes
+
 - The LGPL-3.0-only license is because of https://github.com/web3/web3.js?tab=readme-ov-file
 
 ## hedera-block-node
@@ -171,7 +173,8 @@ Info:
 | MIT                | :white_check_mark: |
 | MPL-2.0            | :white_check_mark: |
 
-Info:
+### Notes
+
 - The "GPL-2.0-only WITH Classpath-exception-2.0" license is because of "Maven:com.google.errorprone:javac-shaded:9-dev-r4023-3"
 - The "LGPL-2.1-only" license is because of "Maven:com.github.spotbugs:spotbugs-annotations:4.7.3" that is not needed at runtime
 
