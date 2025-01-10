@@ -4,6 +4,7 @@
 run_analysis() {
   local repo_url=$1
   local config_file=$2
+  local run_scanner=$3
 
   # Erstelle einen temporären Ordner
   temp_dir=$(mktemp -d)
@@ -24,8 +25,14 @@ run_analysis() {
   # Analyse durchführen
   /root/ort/bin/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i "$temp_dir/$repo_name" -o "$temp_dir/$repo_name/out"
 
-  # Bericht erstellen
-  /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
+  # Scanner ausführen, wenn konfiguriert
+  if [[ "$run_scanner" == "true" ]]; then
+    /root/ort/bin/ort --info -P ort.scanner.skipExcluded=true scan -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o [scanner-output-dir]
+    /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/scan-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
+  else
+    /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
+  fi
+
 
   cp -r $temp_dir/$repo_name/out/* ort-output/$repo_name/
 
@@ -35,33 +42,33 @@ run_analysis() {
 
 # Liste der Repositories (URLs) und zugehörigen Konfigurationsdateien
 repos=(
-  "https://github.com/hashgraph/hedera-sdk-swift.git|hedera-sdk-swift.yml"
-  "https://github.com/hashgraph/hedera-sdk-java.git|hedera-sdk-java.yml"
-  "https://github.com/hashgraph/hedera-sdk-rust.git|hedera-sdk-rust.yml"
-  "https://github.com/hashgraph/hedera-sdk-js.git|hedera-sdk-js.yml"
-  "https://github.com/hashgraph/solo.git|solo.yml"
-  "https://github.com/hashgraph/hedera-local-node.git|hedera-local-node.yml"
-  "https://github.com/hashgraph/hedera-json-rpc-relay.git|hedera-json-rpc-relay.yml"
-  "https://github.com/hashgraph/hedera-mirror-node.git|hedera-mirror-node.yml"
-  "https://github.com/hashgraph/hedera-mirror-node-explorer.git|hedera-mirror-node-explorer.yml"
-  "https://github.com/hashgraph/hedera-block-node.git|hedera-block-node.yml"
-  "https://github.com/hashgraph/hedera-services.git|hedera-services.yml"
-  "https://github.com/hashgraph/did-method.git|did-method.yml"
-  "https://github.com/hashgraph/did-sdk-js.git|did-sdk-js.yml"
-  "https://github.com/hashgraph/did-sdk-java.git|did-sdk-java.yml"
-  "https://github.com/hiero-ledger/hiero-sdk-tck.git|hedera-sdk-tck.yml"
-  "https://github.com/hiero-ledger/hiero-sdk-go.git|hedera-sdk-go.yml"
-  "https://github.com/hiero-ledger/hiero-sdk-cpp.git|hedera-sdk-cpp.yml"
-  "https://github.com/nadineloepfe/hedera_sdk_python.git|hedera-sdk-python.yml"
-  "https://github.com/OpenElements/hedera-solo-action.git|hedera-solo-action.yml"
+  "https://github.com/hashgraph/hedera-sdk-swift.git|hedera-sdk-swift.yml|true"
+  "https://github.com/hashgraph/hedera-sdk-java.git|hedera-sdk-java.yml|false"
+  "https://github.com/hashgraph/hedera-sdk-rust.git|hedera-sdk-rust.yml|false"
+  "https://github.com/hashgraph/hedera-sdk-js.git|hedera-sdk-js.yml|false"
+  "https://github.com/hashgraph/solo.git|solo.yml|false"
+  "https://github.com/hashgraph/hedera-local-node.git|hedera-local-node.yml|false"
+  "https://github.com/hashgraph/hedera-json-rpc-relay.git|hedera-json-rpc-relay.yml|false"
+  "https://github.com/hashgraph/hedera-mirror-node.git|hedera-mirror-node.yml|false"
+  "https://github.com/hashgraph/hedera-mirror-node-explorer.git|hedera-mirror-node-explorer.yml|false"
+  "https://github.com/hashgraph/hedera-block-node.git|hedera-block-node.yml|false"
+  "https://github.com/hashgraph/hedera-services.git|hedera-services.yml|false"
+  "https://github.com/hashgraph/did-method.git|did-method.yml|false"
+  "https://github.com/hashgraph/did-sdk-js.git|did-sdk-js.yml|false"
+  "https://github.com/hashgraph/did-sdk-java.git|did-sdk-java.yml|false"
+  "https://github.com/hiero-ledger/hiero-sdk-tck.git|hedera-sdk-tck.yml|false"
+  "https://github.com/hiero-ledger/hiero-sdk-go.git|hedera-sdk-go.yml|true"
+  "https://github.com/hiero-ledger/hiero-sdk-cpp.git|hedera-sdk-cpp.yml|false"
+  "https://github.com/nadineloepfe/hedera_sdk_python.git|hedera-sdk-python.yml|false"
+  "https://github.com/OpenElements/hedera-solo-action.git|hedera-solo-action.yml|false"
 )
 
 rm -rf ort-output
 
 # Alle Repositories durchlaufen und Funktion aufrufen
 for repo in "${repos[@]}"; do
-  IFS="|" read -r repo_url config_file <<< "$repo"
-  run_analysis "$repo_url" "$config_file"
+  IFS="|" read -r repo_url config_file run_scanner <<< "$repo"
+  run_analysis "$repo_url" "$config_file" "$run_scanner"
 done
 
 # Erstelle die ZIP-Datei innerhalb des `ort-output`-Verzeichnisses
