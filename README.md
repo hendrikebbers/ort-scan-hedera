@@ -33,7 +33,7 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | ISC                | :white_check_mark: |
 | MIT                | :white_check_mark: |
 | Python-2.0         | :white_check_mark: |
-| Unlicense          | ? |
+| Unlicense          | :white_check_mark: |
 
 
 ## hedera-sdk-js
@@ -63,7 +63,7 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | 0BSD               | :white_check_mark: |
 | Apache-2.0         | :white_check_mark: |
 | BSD-1-Clause       | ? |
-| Unknown       | ? |
+| Unknown            | ? |
 | BSD-2-Clause       | :white_check_mark: |
 | BSD-3-Clause       | :white_check_mark: |
 | ISC                | :white_check_mark: |
@@ -74,6 +74,8 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 ### Notes
 
 - Unknown license: https://github.com/briansmith/ring/blob/main/LICENSE
+- Example for project under "Unicode 3.0" license: https://github.com/unicode-org/icu4x?tab=readme-ov-file
+
 
 ## solo
 
@@ -87,7 +89,7 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | ISC                | :white_check_mark: |
 | MIT                | :white_check_mark: |
 | Python-2.0         | :white_check_mark: |
-| Unlicense          | ? |
+| Unlicense          | :white_check_mark: |
 
 ## hedera-local-node
 
@@ -101,7 +103,7 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | ISC                | :white_check_mark: |
 | MIT                | :white_check_mark: |
 | Python-2.0         | :white_check_mark: |
-| Unlicense          | ? |
+| Unlicense          | :white_check_mark: |
 
 ## hedera-json-rpc-relay
 
@@ -151,7 +153,7 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | LGPL-3.0-only      | :red_circle: |
 | MIT                | :white_check_mark: |
 | MPL-2.0            | :white_check_mark: |
-| Unlicense          | ? |
+| Unlicense          | :white_check_mark: |
 | Zlib               | :white_check_mark: |
 
 ### Notes
@@ -202,7 +204,7 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | BSD-3-Clause       | :white_check_mark: |
 | ISC                | :white_check_mark: |
 | MIT                | :white_check_mark: |
-| Unlicense          | ? |
+| Unlicense          | :white_check_mark: |
 
 
 ## did-sdk-java
