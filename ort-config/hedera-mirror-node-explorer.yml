@@ -14,6 +14,18 @@ excludes:
       comment: "Packages for development only."
 license_choices:
   package_license_choices:
+    - package_id: "NPM::json-schema:0.4.0"
+      license_choices:
+        - given: AFL-2.1 OR BSD-3-Clause
+          choice: BSD-3-Clause
+    - package_id: "NPM::type-fest:0.21.3"
+      license_choices:
+        - given: CC0-1.0 OR MIT
+          choice: MIT
+    - package_id: "NPM::type-fest:4.32.0"
+      license_choices:
+        - given: CC0-1.0 OR MIT
+          choice: MIT
     - package_id: "NPM::node-forge:1.3.1"
       license_choices:
         - given: BSD-3-Clause OR GPL-2.0-only
@@ -22,3 +34,11 @@ license_choices:
       license_choices:
         - given: MIT OR WTFPL
           choice: MIT
+    - package_id: "NPM::jszip:3.10.1"
+      license_choices:
+        - given: GPL-3.0-or-later OR MIT
+          choice: MIT
+    - package_id: "NPM::node-forge:1.3.1"
+      license_choices:
+        - given: BSD-3-Clause OR GPL-2.0-only
+          choice: BSD-3-Clause

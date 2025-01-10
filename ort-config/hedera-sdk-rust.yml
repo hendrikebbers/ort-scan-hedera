@@ -8,3 +8,37 @@ excludes:
     - pattern: "dev-dependencies"
       reason: "DEV_DEPENDENCY_OF"
       comment: "Packages for development only."
+license_choices:
+  package_license_choices:
+    - package_id: "Crate::aho-corasick:1.1.3"
+      license_choices:
+        - given: MIT OR Unlicense
+          choice: MIT
+    - package_id: "Crate::byteorder:1.5.0"
+      license_choices:
+        - given: MIT OR Unlicense
+          choice: MIT
+    - package_id: "Crate::memchr:2.7.4"
+      license_choices:
+        - given: MIT OR Unlicense
+          choice: MIT
+    - package_id: "Crate::regex-automata:0.1.10"
+      license_choices:
+        - given: MIT OR Unlicense
+          choice: MIT
+    - package_id: "Crate::miniz_oxide:0.8.2"
+      license_choices:
+        - given: Apache-2.0 OR MIT OR Zlib
+          choice: MIT
+    - package_id: "Crate::tinyvec:1.8.1"
+      license_choices:
+        - given: Apache-2.0 OR MIT OR Zlib
+          choice: MIT
+    - package_id: "Crate::tinyvec_macros:0.1.1"
+      license_choices:
+        - given: Apache-2.0 OR MIT OR Zlib
+          choice: MIT
+    - package_id: "Crate::unsize:1.1.0"
+      license_choices:
+        - given: Apache-2.0 OR MIT OR Zlib
+          choice: MIT
