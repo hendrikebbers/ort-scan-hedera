@@ -11,6 +11,17 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 
 | License (SPDX)     | state |
 | ------------------ | ----- |
+| Apache-2.0         | :white_check_mark: |
+| BSD-2-Clause       | :white_check_mark: |
+| BSD-3-Clause       | :white_check_mark: |
+| Unknown            | :red_circle: |
+| ISC                | :white_check_mark: |
+| MIT                | :white_check_mark: |
+
+Info:
+
+- The lib https://github.com/krzyzanowskim/CryptoSwift.git has an unknown license
+
 
 ## hiero-sdk-tck
 
