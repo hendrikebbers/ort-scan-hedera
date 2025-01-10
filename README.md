@@ -46,6 +46,10 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 | License (SPDX)     | state |
 | ------------------ | ----- |
 
+### Notes
+
+- The repo has been manually checked and the only problem we found has been replaced.
+
 ## hedera-sdk-java
 
 | License (SPDX)     | state |
@@ -75,7 +79,6 @@ This project contains the configuration to scan the Hiero / Hedera codebase usin
 
 - Unknown license: https://github.com/briansmith/ring/blob/main/LICENSE
 - Example for project under "Unicode 3.0" license: https://github.com/unicode-org/icu4x?tab=readme-ov-file
-
 
 ## solo
 
