@@ -6,41 +6,27 @@ run_analysis() {
   local config_file=$2
   local run_scanner=$3
 
-  # Erstelle einen temporären Ordner
   temp_dir=$(mktemp -d)
-  repo_name=$(basename "$repo_url" .git)  # Der Repository-Name
-
-  echo "Cloning $repo_url into $temp_dir..."
+  repo_name=$(basename "$repo_url" .git)
   git clone "$repo_url" "$temp_dir/$repo_name"
-
-  # Kopiere die Konfigurationsdatei in das temporäre Repository
   cp "ort-config/$config_file" "$temp_dir/$repo_name/.ort.yml"
-
   rm "$temp_dir/$repo_name/Cargo.lock"
   rm "$temp_dir/$repo_name/package-lock.json"
   rm "$temp_dir/$repo_name/pnpm-lock.yaml"
-
   mkdir -p ort-output/$repo_name
 
-  # Analyse durchführen
   /root/ort/bin/ort --info -P ort.analyzer.allowDynamicVersions=true analyze -i "$temp_dir/$repo_name" -o "$temp_dir/$repo_name/out"
-
-  # Scanner ausführen, wenn konfiguriert
   if [[ "$run_scanner" == "true" ]]; then
     /root/ort/bin/ort --info -P ort.scanner.skipExcluded=true scan -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o [scanner-output-dir]
     /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/scan-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
   else
     /root/ort/bin/ort --info report -i "$temp_dir/$repo_name/out/analyzer-result.yml" -o "$temp_dir/$repo_name/out" --report-formats=WebApp,StaticHTML
   fi
-
-
   cp -r $temp_dir/$repo_name/out/* ort-output/$repo_name/
-
-  # Temp-Verzeichnis löschen (optional)
   rm -rf "$temp_dir"
 }
 
-# Liste der Repositories (URLs) und zugehörigen Konfigurationsdateien
+# Liste der Repositories (URLs), Konfigurationsdateien und ob der Scanner ausgeführt werden soll
 repos=(
   "https://github.com/hashgraph/hedera-sdk-swift.git|hedera-sdk-swift.yml|true"
   "https://github.com/hashgraph/hedera-sdk-java.git|hedera-sdk-java.yml|false"
@@ -58,7 +44,6 @@ repos=(
   "https://github.com/hashgraph/did-sdk-java.git|did-sdk-java.yml|false"
   "https://github.com/hashgraph/hedera-docs.git|hedera-docs.yml|false"
   "https://github.com/hashgraph/hedera-protobufs.git|hedera-protobufs.yml|false"
-  "https://github.com/hashgraph/hedera-improvement-proposal.git|hedera-improvement-proposal.yml|false"
   "https://github.com/hiero-ledger/hiero-sdk-tck.git|hedera-sdk-tck.yml|false"
   "https://github.com/hiero-ledger/hiero-sdk-go.git|hedera-sdk-go.yml|true"
   "https://github.com/hiero-ledger/hiero-sdk-cpp.git|hedera-sdk-cpp.yml|false"
@@ -68,11 +53,23 @@ repos=(
 
 rm -rf ort-output
 
+# Maximal 4 parallele Prozesse
+max_parallel_jobs=4
+current_jobs=0
 # Alle Repositories durchlaufen und Funktion aufrufen
 for repo in "${repos[@]}"; do
   IFS="|" read -r repo_url config_file run_scanner <<< "$repo"
-  run_analysis "$repo_url" "$config_file" "$run_scanner"
+  # Starte den Prozess im Hintergrund
+  run_analysis "$repo_url" "$config_file" "$run_scanner" &
+  ((current_jobs++))
+  # Wenn die maximale Anzahl paralleler Jobs erreicht ist, warte auf die Fertigstellung
+  if ((current_jobs >= max_parallel_jobs)); then
+    wait
+    current_jobs=0
+  fi
 done
+# Warte auf alle laufenden Prozesse, bevor das Skript endet
+wait
 
 # Erstelle die ZIP-Datei innerhalb des `ort-output`-Verzeichnisses
 zip_file_name="ort-output-$(date +%Y-%m-%d_%H-%M-%S).zip"
