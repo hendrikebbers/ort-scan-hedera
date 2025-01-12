@@ -11,6 +11,12 @@ excludes:
     - pattern: "tools/**"
       reason: "OTHER"
       comment: "-"
+    - pattern: "dapp-example/**"
+      reason: "OTHER"
+      comment: "-"
+    - pattern: "docs/**"
+      reason: "OTHER"
+      comment: "-"
   scopes:
     - pattern: "devDependencies"
       reason: "DEV_DEPENDENCY_OF"
@@ -36,4 +42,24 @@ license_choices:
     - package_id: "NPM::spark-md5:3.0.2"
       license_choices:
         - given: MIT OR WTFPL
+          choice: MIT
+    - package_id: "NPM::type-fest:0.4.1"
+      license_choices:
+        - given: CC0-1.0 OR MIT
+          choice: MIT
+    - package_id: "NPM::type-fest:0.6.0"
+      license_choices:
+        - given: CC0-1.0 OR MIT
+          choice: MIT
+    - package_id: "NPM::type-fest:0.8.1"
+      license_choices:
+        - given: CC0-1.0 OR MIT
+          choice: MIT
+    - package_id: "NPM::type-fest:0.18.1"
+      license_choices:
+        - given: CC0-1.0 OR MIT
+          choice: MIT
+    - package_id: "NPM::type-fest:0.21.3"
+      license_choices:
+        - given: CC0-1.0 OR MIT
           choice: MIT
