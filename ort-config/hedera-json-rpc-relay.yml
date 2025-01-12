@@ -8,6 +8,9 @@ excludes:
     - pattern: ".github/**"
       reason: "OTHER"
       comment: "-"
+    - pattern: "tools/**"
+      reason: "OTHER"
+      comment: "-"
   scopes:
     - pattern: "devDependencies"
       reason: "DEV_DEPENDENCY_OF"
